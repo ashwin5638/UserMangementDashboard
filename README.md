@@ -121,8 +121,5 @@ Add screenshots of your application here.
 * Advanced filtering
 * Backend database integration
 
-## 👨‍💻 Author
-
-**K Ashwin**
-
-GitHub: https://github.com/ashwin5638
+## Project Live 
+  https://usermanagement126.netlify.app/
