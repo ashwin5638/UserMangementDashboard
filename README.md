@@ -1,16 +1,128 @@
-# React + Vite
+# User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A responsive **React.js User Management Dashboard** that performs complete **CRUD (Create, Read, Update, Delete)** operations using the **JSONPlaceholder REST API**. The application provides a clean and user-friendly interface for managing users with search, filtering, sorting, pagination, and form validation.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* View all users in a responsive table
+* Search users in real time
+* Sort users by multiple fields
+* Filter users dynamically
+* Add new users
+* Edit existing user details
+* Delete users with confirmation
+* Responsive pagination
+* Form validation
+* Loading and error handling
+* Modular and reusable component architecture
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React.js
+* Vite
+* Axios
+* JavaScript (ES6+)
+* CSS3
+* JSONPlaceholder REST API
 
-## Expanding the Oxlint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```text
+user-management-dashboard/
+│
+├── public/
+├── src/
+│   ├── api/
+│   │   └── userService.js
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── UserTable.jsx
+│   │   ├── UserRow.jsx
+│   │   ├── UserForm.jsx
+│   │   ├── SearchBar.jsx
+│   │   ├── FilterPopup.jsx
+│   │   ├── Pagination.jsx
+│   │   └── ConfirmDelete.jsx
+│   ├── hooks/
+│   │   └── useUsers.js
+│   ├── utils/
+│   │   ├── constants.js
+│   │   ├── helpers.js
+│   │   └── validators.js
+│   ├── styles/
+│   ├── App.jsx
+│   └── main.jsx
+├── package.json
+└── README.md
+```
+
+## 🌐 API
+
+**Base URL**
+
+```text
+https://jsonplaceholder.typicode.com/users
+```
+
+**HTTP Methods Used**
+
+* GET
+* POST
+* PUT
+* DELETE
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/user-management-dashboard.git
+```
+
+Navigate to the project:
+
+```bash
+cd user-management-dashboard
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## 📌 Functionality
+
+* Fetch users from the REST API
+* Display users in a responsive table
+* Search by name, username, or email
+* Sort users alphabetically
+* Filter users using multiple criteria
+* Add and edit user information
+* Delete users with a confirmation dialog
+* Validate form inputs before submission
+* Handle API errors gracefully
+
+## 📷 Screenshots
+
+Add screenshots of your application here.
+
+## 📈 Future Improvements
+
+* Authentication and authorization
+* Dark mode
+* Export users to CSV/PDF
+* Advanced filtering
+* Backend database integration
+
+## 👨‍💻 Author
+
+**K Ashwin**
+
+GitHub: https://github.com/ashwin5638
