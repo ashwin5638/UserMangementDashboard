@@ -1,20 +1,16 @@
-export default function UserRow({ user, index, onEdit, onDelete }) {
+export default function UserRow({ user, onEdit, onDelete }) {
   return (
     <tr className="user-row">
-      <td className="td-index">{index}</td>
-      <td className="td-name" data-label="Name">
+      <td className="td-index">{user.id}</td>
+      <td className="td-first-name" data-label="First Name">
         <div className="user-name-cell">
-          <div className="user-avatar">{user.name.charAt(0).toUpperCase()}</div>
-          <div>
-            <div className="user-name">{user.name}</div>
-            <div className="user-username">@{user.username}</div>
-          </div>
+          <div className="user-avatar">{user.firstName.charAt(0).toUpperCase()}</div>
+          <div className="user-name">{user.firstName}</div>
         </div>
       </td>
+      <td className="td-last-name" data-label="Last Name">{user.lastName}</td>
       <td className="td-email" data-label="Email">{user.email}</td>
-      <td className="td-phone" data-label="Phone">{user.phone}</td>
-      <td className="td-company" data-label="Company">{user.company?.name || '-'}</td>
-      <td className="td-city" data-label="City">{user.address?.city || '-'}</td>
+      <td className="td-department" data-label="Department">{user.department || '-'}</td>
       <td className="td-actions" data-label="Actions">
         <div className="action-buttons">
           <button className="btn btn-sm btn-edit" onClick={() => onEdit(user)} title="Edit user">

@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { getUser, createUser, updateUser, deleteUser } from '../api/userService';
 import { filterUsers, searchUsers, sortUsers } from '../utils/helpers';
+import { apiToApp, appToApi } from '../utils/dataMapper';
 
 export const useUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({});
-  const [sortField, setSortField] = useState('name');
+  const [sortField, setSortField] = useState('firstName');
   const [sortDir, setSortDir] = useState('asc');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -18,9 +19,9 @@ export const useUsers = () => {
     setError(null);
     try {
       const data = await getUser();
-      setUsers(data);
+      setUsers(data.map(apiToApp));
     } catch {
-      setError('Failed to fetch users. Please try again later.');
+      setError('Unable to fetch active users from the database. Please verify your connection status and try again.');
     } finally {
       setLoading(false);
     }
@@ -71,10 +72,10 @@ export const useUsers = () => {
     setUsers(prev => [...prev, newUser]);
 
     try {
-      const createdUser = await createUser(userData);
+      const apiData = appToApi(userData);
+      const createdUser = await createUser(apiData);
       setUsers(prev => prev.map(u => u.id === tempId ? { ...u, id: createdUser.id } : u));
     } catch {
-      // JSONPlaceholder mock doesn't persist; keep local user with tempId
     }
     return { success: true };
   }, []);
@@ -82,9 +83,10 @@ export const useUsers = () => {
   const editUser = useCallback(async (id, userData) => {
     setUsers(prev => prev.map(u => u.id === id ? { ...u, ...userData } : u));
     try {
-      await updateUser(id, userData);
+      const apiData = appToApi(userData);
+      await updateUser(id, apiData);
     } catch {
-      // JSONPlaceholder mock doesn't persist; keep local changes
+     
     }
     return { success: true };
   }, []);
@@ -94,7 +96,7 @@ export const useUsers = () => {
     try {
       await deleteUser(id);
     } catch {
-      // JSONPlaceholder mock doesn't persist; keep local changes
+     
     }
     return { success: true };
   }, []);

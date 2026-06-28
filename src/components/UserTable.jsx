@@ -1,11 +1,10 @@
 import UserRow from './UserRow';
 
 const SORTABLE_COLUMNS = [
-  { key: 'name', label: 'Name', sortable: true },
+  { key: 'firstName', label: 'First Name', sortable: true },
+  { key: 'lastName', label: 'Last Name', sortable: true },
   { key: 'email', label: 'Email', sortable: true },
-  { key: 'phone', label: 'Phone', sortable: true },
-  { key: 'company.name', label: 'Company', sortable: true },
-  { key: 'address.city', label: 'City', sortable: true },
+  { key: 'department', label: 'Department', sortable: true },
 ];
 
 export default function UserTable({ users, sortField, sortDir, onSort, onEdit, onDelete, loading, error }) {
@@ -58,7 +57,7 @@ export default function UserTable({ users, sortField, sortDir, onSort, onEdit, o
         <table className="user-table">
           <thead>
             <tr>
-              <th className="th-index">#</th>
+              <th className="th-index">ID</th>
               {SORTABLE_COLUMNS.map(col => (
                 <th
                   key={col.key}
@@ -81,11 +80,10 @@ export default function UserTable({ users, sortField, sortDir, onSort, onEdit, o
             </tr>
           </thead>
           <tbody>
-            {users.map((user, idx) => (
+            {users.map((user) => (
               <UserRow
                 key={user.id}
                 user={user}
-                index={idx + 1}
                 onEdit={onEdit}
                 onDelete={onDelete}
               />

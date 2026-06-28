@@ -386,12 +386,17 @@ body {
 }
 
 .th-index {
-  width: 50px;
+  width: 70px;
+  text-align: center;
+}
+
+.th-id {
+  width: 70px;
   text-align: center;
 }
 
 .th-actions {
-  width: 180px;
+  width: 200px;
   text-align: center;
 }
 
@@ -444,17 +449,12 @@ body {
   color: var(--text);
 }
 
-.user-username {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
 .td-email {
   color: var(--primary);
 }
 
-.td-phone {
-  font-variant-numeric: tabular-nums;
+.td-department {
+  font-weight: 500;
 }
 
 .td-actions {

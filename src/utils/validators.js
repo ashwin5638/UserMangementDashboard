@@ -7,15 +7,15 @@ export const validateRequired = (value) => {
   return value?.trim().length > 0;
 };
 
-export const validatePhone = (phone) => {
-  return phone?.trim().length >= 6;
-};
-
 export const validateUserForm = (data) => {
   const errors = {};
 
-  if (!validateRequired(data.name)) {
-    errors.name = 'Name is required';
+  if (!validateRequired(data.firstName)) {
+    errors.firstName = 'First name is required';
+  }
+
+  if (!validateRequired(data.lastName)) {
+    errors.lastName = 'Last name is required';
   }
 
   if (!validateRequired(data.email)) {
@@ -24,22 +24,8 @@ export const validateUserForm = (data) => {
     errors.email = 'Invalid email format';
   }
 
-  if (!validateRequired(data.phone)) {
-    errors.phone = 'Phone is required';
-  } else if (!validatePhone(data.phone)) {
-    errors.phone = 'Phone must be at least 6 characters';
-  }
-
-  if (!validateRequired(data.username)) {
-    errors.username = 'Username is required';
-  }
-
-  if (!validateRequired(data.company?.name)) {
-    errors.companyName = 'Company name is required';
-  }
-
-  if (!validateRequired(data.address?.city)) {
-    errors.city = 'City is required';
+  if (!validateRequired(data.department)) {
+    errors.department = 'Department is required';
   }
 
   return errors;

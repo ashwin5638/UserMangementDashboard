@@ -2,16 +2,13 @@ import { useState, useEffect } from 'react';
 import { validateUserForm } from '../utils/validators';
 
 const emptyForm = {
-  name: '',
-  username: '',
+  firstName: '',
+  lastName: '',
   email: '',
-  phone: '',
-  website: '',
-  company: { name: '', catchPhrase: '', bs: '' },
-  address: { street: '', suite: '', city: '', zipcode: '' },
+  department: '',
 };
 
-function FormField({ label, name, type = 'text', value, onChange, onBlur, error, placeholder, required = false, parent }) {
+function FormField({ label, name, type = 'text', value, onChange, onBlur, error, placeholder, required = false }) {
   return (
     <div className="form-group">
       <label className="form-label">
@@ -23,8 +20,8 @@ function FormField({ label, name, type = 'text', value, onChange, onBlur, error,
         className={`form-input ${error ? 'input-error' : ''}`}
         placeholder={placeholder}
         value={value}
-        onChange={(e) => onChange(name, e.target.value, parent)}
-        onBlur={() => onBlur?.(name, parent)}
+        onChange={(e) => onChange(name, e.target.value)}
+        onBlur={() => onBlur?.(name)}
       />
       {error && <span className="error-text">{error}</span>}
     </div>
@@ -40,22 +37,10 @@ export default function UserForm({ isOpen, onClose, onSubmit, initialData, isEdi
     if (isOpen) {
       if (isEditing && initialData) {
         setForm({
-          name: initialData.name || '',
-          username: initialData.username || '',
+          firstName: initialData.firstName || '',
+          lastName: initialData.lastName || '',
           email: initialData.email || '',
-          phone: initialData.phone || '',
-          website: initialData.website || '',
-          company: {
-            name: initialData.company?.name || '',
-            catchPhrase: initialData.company?.catchPhrase || '',
-            bs: initialData.company?.bs || '',
-          },
-          address: {
-            street: initialData.address?.street || '',
-            suite: initialData.address?.suite || '',
-            city: initialData.address?.city || '',
-            zipcode: initialData.address?.zipcode || '',
-          },
+          department: initialData.department || '',
         });
       } else {
         setForm(emptyForm);
@@ -64,22 +49,16 @@ export default function UserForm({ isOpen, onClose, onSubmit, initialData, isEdi
     }
   }, [isOpen, isEditing, initialData]);
 
-  const validateField = (field, parent) => {
+  const validateField = (field) => {
     const fullErrors = validateUserForm(form);
-    const mappedField = parent ? parent + field.charAt(0).toUpperCase() + field.slice(1) : field;
-    setErrors(prev => ({ ...prev, [mappedField]: fullErrors[mappedField] || null }));
+    setErrors(prev => ({ ...prev, [field]: fullErrors[field] || null }));
   };
 
-  const handleChange = (field, value, parent) => {
-    if (parent) {
-      setForm(prev => ({ ...prev, [parent]: { ...prev[parent], [field]: value } }));
-    } else {
-      setForm(prev => ({ ...prev, [field]: value }));
-    }
-    const mappedField = parent ? parent + field.charAt(0).toUpperCase() + field.slice(1) : field;
+  const handleChange = (field, value) => {
+    setForm(prev => ({ ...prev, [field]: value }));
     setErrors(prev => {
       const next = { ...prev };
-      delete next[mappedField];
+      delete next[field];
       return next;
     });
   };
@@ -118,32 +97,13 @@ export default function UserForm({ isOpen, onClose, onSubmit, initialData, isEdi
         </div>
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
-            <h3 className="form-section-title">Personal Information</h3>
             <div className="form-row">
-              <FormField label="Name" name="name" value={form.name} onChange={handleChange} onBlur={validateField} error={errors.name} placeholder="John Doe" required />
-              <FormField label="Username" name="username" value={form.username} onChange={handleChange} onBlur={validateField} error={errors.username} placeholder="johndoe" required />
+              <FormField label="First Name" name="firstName" value={form.firstName} onChange={handleChange} onBlur={validateField} error={errors.firstName} placeholder="John" required />
+              <FormField label="Last Name" name="lastName" value={form.lastName} onChange={handleChange} onBlur={validateField} error={errors.lastName} placeholder="Doe" required />
             </div>
             <div className="form-row">
               <FormField label="Email" name="email" type="email" value={form.email} onChange={handleChange} onBlur={validateField} error={errors.email} placeholder="john@example.com" required />
-              <FormField label="Phone" name="phone" value={form.phone} onChange={handleChange} onBlur={validateField} error={errors.phone} placeholder="1-234-567-8900" required />
-            </div>
-            <FormField label="Website" name="website" value={form.website} onChange={handleChange} onBlur={validateField} placeholder="johndoe.com" />
-
-            <h3 className="form-section-title">Address</h3>
-            <div className="form-row">
-              <FormField label="Street" name="street" value={form.address.street} onChange={handleChange} onBlur={validateField} placeholder="123 Main St" parent="address" />
-              <FormField label="Suite" name="suite" value={form.address.suite} onChange={handleChange} onBlur={validateField} placeholder="Apt. 123" parent="address" />
-            </div>
-            <div className="form-row">
-              <FormField label="City" name="city" value={form.address.city} onChange={handleChange} onBlur={validateField} error={errors.city} placeholder="New York" required parent="address" />
-              <FormField label="Zipcode" name="zipcode" value={form.address.zipcode} onChange={handleChange} onBlur={validateField} placeholder="12345" parent="address" />
-            </div>
-
-            <h3 className="form-section-title">Company</h3>
-            <FormField label="Company Name" name="name" value={form.company.name} onChange={handleChange} onBlur={validateField} error={errors.companyName} placeholder="Acme Corp" required parent="company" />
-            <div className="form-row">
-              <FormField label="Catch Phrase" name="catchPhrase" value={form.company.catchPhrase} onChange={handleChange} onBlur={validateField} placeholder="Innovative solutions" parent="company" />
-              <FormField label="BS" name="bs" value={form.company.bs} onChange={handleChange} onBlur={validateField} placeholder="Business strategy" parent="company" />
+              <FormField label="Department" name="department" value={form.department} onChange={handleChange} onBlur={validateField} error={errors.department} placeholder="Engineering" required />
             </div>
             {errors.submit && <div className="error-banner">{errors.submit}</div>}
           </div>

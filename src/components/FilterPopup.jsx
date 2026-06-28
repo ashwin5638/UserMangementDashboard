@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 
 export default function FilterPopup({ isOpen, onClose, onApply, onReset, filters }) {
   const [localFilters, setLocalFilters] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    company: '',
-    city: '',
+    department: '',
   });
 
   useEffect(() => {
     if (isOpen) {
       setLocalFilters({
-        name: filters.name || '',
+        firstName: filters.firstName || '',
+        lastName: filters.lastName || '',
         email: filters.email || '',
-        company: filters.company || '',
-        city: filters.city || '',
+        department: filters.department || '',
       });
     }
   }, [isOpen, filters]);
@@ -35,7 +35,7 @@ export default function FilterPopup({ isOpen, onClose, onApply, onReset, filters
   };
 
   const handleReset = () => {
-    setLocalFilters({ name: '', email: '', company: '', city: '' });
+    setLocalFilters({ firstName: '', lastName: '', email: '', department: '' });
     onReset();
     onClose();
   };
@@ -53,13 +53,23 @@ export default function FilterPopup({ isOpen, onClose, onApply, onReset, filters
         </div>
         <div className="modal-body">
           <div className="form-group">
-            <label className="form-label">Name</label>
+            <label className="form-label">First Name</label>
             <input
               type="text"
               className="form-input"
-              placeholder="Filter by name..."
-              value={localFilters.name}
-              onChange={(e) => handleChange('name', e.target.value)}
+              placeholder="Filter by first name..."
+              value={localFilters.firstName}
+              onChange={(e) => handleChange('firstName', e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Last Name</label>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Filter by last name..."
+              value={localFilters.lastName}
+              onChange={(e) => handleChange('lastName', e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -73,23 +83,13 @@ export default function FilterPopup({ isOpen, onClose, onApply, onReset, filters
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Company</label>
+            <label className="form-label">Department</label>
             <input
               type="text"
               className="form-input"
-              placeholder="Filter by company..."
-              value={localFilters.company}
-              onChange={(e) => handleChange('company', e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-label">City</label>
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Filter by city..."
-              value={localFilters.city}
-              onChange={(e) => handleChange('city', e.target.value)}
+              placeholder="Filter by department..."
+              value={localFilters.department}
+              onChange={(e) => handleChange('department', e.target.value)}
             />
           </div>
         </div>

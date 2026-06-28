@@ -16,7 +16,7 @@ export default function ConfirmDelete({ isOpen, onClose, onConfirm, user }) {
             </svg>
           </div>
           <p className="confirm-text">
-            Are you sure you want to delete <strong>{user.name}</strong>?
+            Are you sure you want to delete <strong>{user.firstName} {user.lastName}</strong>?
           </p>
           <p className="confirm-subtext">
             This action cannot be undone. The user will be permanently removed from the system.

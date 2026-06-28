@@ -1,4 +1,4 @@
-import { API_URL } from "../Utils/constants";
+import { API_URL } from "../utils/constants";
 import axios from 'axios';
 
 const api = axios.create({

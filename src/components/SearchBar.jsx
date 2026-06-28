@@ -10,7 +10,7 @@ export default function SearchBar({ value, onChange }) {
       <input
         type="text"
         className="search-input"
-        placeholder="Search by name, email, or company..."
+        placeholder="Search by first name, last name, or email..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
